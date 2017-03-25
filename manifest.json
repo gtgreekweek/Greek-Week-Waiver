@@ -7,7 +7,7 @@
             "matches": [
                 "https://orgsync.com/*participants*"
             ],
-            "js": ["content.js", "jquery.js"]
+            "js": ["jquery.js", "waiver.js", "content.js"]
   }
 ]
 }
