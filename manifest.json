@@ -1,0 +1,13 @@
+{
+    "manifest_version": 2,
+    "name": "Greek Week Waiver",
+    "version": "1.0",
+    "content_scripts": [
+        {
+            "matches": [
+                "https://orgsync.com/*participants*"
+            ],
+            "js": ["content.js", "jquery.js"]
+  }
+]
+}
