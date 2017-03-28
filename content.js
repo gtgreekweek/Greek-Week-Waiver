@@ -17,9 +17,13 @@ function nodeInsertedCallback(event) {
         var hasSignedWaiver = (signed_waiver.indexOf(name) != -1)
         
         var textToAdd = (hasSignedWaiver) ? goodText : badText
-        
         person.html(name + " " + textToAdd)
+        
+        if (!hasSignedWaiver) {
+            person.css('background', '#fcc')
+        }
     }
+    
 };
 
 document.addEventListener('DOMNodeInserted', nodeInsertedCallback)
