@@ -2,12 +2,20 @@
     "manifest_version": 2,
     "name": "GT Greek Week Waiver Check",
     "version": "1.0.3",
+    "permissions": ["declarativeContent", "storage","https://spreadsheets.google.com/"],
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+    "page_action": {
+      "default_popup": "popup.html"
+    },
     "content_scripts": [
         {
             "matches": [
                 "https://orgsync.com/*participants*"
             ],
-            "js": ["jquery.js", "waiver.js", "content.js"]
+            "js": ["sha256.js", "jquery.js", "content.js" ]
         }
     ],
     "icons": {

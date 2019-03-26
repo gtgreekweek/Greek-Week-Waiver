@@ -6,22 +6,18 @@
 # (requires Python 3)
 
 import csv
+import pandas as pd
+from hashlib import sha256
 
-with open('orgsync responses.csv', 'r') as orgsync_responses:
-    csv = csv.reader(orgsync_responses)
-    responses = list(csv)
+excel = pd.read_excel("waiver.xlsx")
 
-responses = responses[1:] # remove the header row
+output = ""
+for index, row in excel.iterrows():
+    name = "%s, %s" % (row["Last Name"], row["First Name"])
+    hash = sha256(str(name).encode('utf-8')).hexdigest()
+    output = output + hash + "\n"
 
-# build waiver.js
-def name_from_response_row(row):
-    # Columns are "Sumbission ID", "Last Name", "First Name", "Email", ...
-    return "\t\"" + row[1] + ", " + row[2] + "\","
-
-names = map(name_from_response_row, responses)
-javascript_array = "var signed_waiver = [\n" + "\n".join(names) + "\n]"
-
-with open("waiver.js", "w") as waiver_js:
-    print(javascript_array, file=waiver_js)
+with open("hashed_names.txt", "w") as hashed_names:
+    print(output, file=hashed_names)
 
 print("Done!")
